@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class DominantElement {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Read array size
+        int n = sc.nextInt();
+        
+        // Read array elements
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        
+        // Find the largest element and its index
+        int maxVal = nums[0];
+        int maxIdx = 0;
+        
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > maxVal) {
+                maxVal = nums[i];
+                maxIdx = i;
+            }
+        }
+        
+        // Check if largest element is at least twice every other element
+        boolean isDominant = true;
+        for (int i = 0; i < n; i++) {
+            if (i != maxIdx && maxVal < 2 * nums[i]) {
+                isDominant = false;
+                break;
+            }
+        }
+        
+        // Print result
+        if (isDominant) {
+            System.out.println(maxIdx);
+        } else {
+            System.out.println(-1);
+        }
+        
+        sc.close();
+    }
+}
