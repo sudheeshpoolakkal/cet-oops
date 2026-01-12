@@ -1,45 +1,266 @@
+// ========== Experiment 31: Character Frequency ==========
 import java.util.Scanner;
 
-public class DominantElement {
+class Experiment31 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        char c = sc.nextLine().charAt(0);
         
-        // Read array size
-        int n = sc.nextInt();
-        
-        // Read array elements
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
+        int freq = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                freq++;
+            }
         }
         
-        // Find the largest element and its index
-        int maxVal = nums[0];
-        int maxIdx = 0;
+        System.out.println(freq);
+        sc.close();
+    }
+}
+
+// ========== Experiment 32: Palindrome String ==========
+import java.util.Scanner;
+
+class Experiment32 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        
+        String reversed = new StringBuilder(s).reverse().toString();
+        
+        if (s.equalsIgnoreCase(reversed)) {
+            System.out.println("1");
+        } else {
+            System.out.println("0");
+        }
+        sc.close();
+    }
+}
+
+// ========== Experiment 33: Count Vowels, Consonants, Digits ==========
+import java.util.Scanner;
+
+class Experiment33 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        
+        int vowels = 0, consonants = 0, digits = 0, special = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            
+            if (Character.isLetter(ch)) {
+                ch = Character.toLowerCase(ch);
+                if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                    vowels++;
+                } else {
+                    consonants++;
+                }
+            } else if (Character.isDigit(ch)) {
+                digits++;
+            } else {
+                special++;
+            }
+        }
+        
+        System.out.println(vowels + " " + consonants + " " + digits + " " + special);
+        sc.close();
+    }
+}
+
+// ========== Experiment 34: Reverse String Word by Word ==========
+import java.util.Scanner;
+
+class Experiment34 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        
+        String[] words = s.split("\\s+");
+        
+        for (int i = words.length - 1; i >= 0; i--) {
+            System.out.print(words[i]);
+            if (i > 0) {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
+        sc.close();
+    }
+}
+
+// ========== Experiment 35: Anagram Check ==========
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Experiment35 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine();
+        String s2 = sc.nextLine();
+        
+        if (s1.length() != s2.length()) {
+            System.out.println("false");
+        } else {
+            char[] arr1 = s1.toLowerCase().toCharArray();
+            char[] arr2 = s2.toLowerCase().toCharArray();
+            
+            Arrays.sort(arr1);
+            Arrays.sort(arr2);
+            
+            if (Arrays.equals(arr1, arr2)) {
+                System.out.println("true");
+            } else {
+                System.out.println("false");
+            }
+        }
+        sc.close();
+    }
+}
+
+// ========== Experiment 36: Largest Number from Strings ==========
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Experiment36 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        String[] nums = sc.nextLine().split("\\s+");
+        
+        Arrays.sort(nums, new Comparator<String>() {
+            public int compare(String a, String b) {
+                String order1 = a + b;
+                String order2 = b + a;
+                return order2.compareTo(order1);
+            }
+        });
+        
+        StringBuilder result = new StringBuilder();
+        for (String num : nums) {
+            result.append(num);
+        }
+        
+        System.out.println(result.toString());
+        sc.close();
+    }
+}
+
+// ========== Experiment 37: Longest Common Prefix ==========
+import java.util.Scanner;
+
+class Experiment37 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        String[] strings = new String[n];
+        for (int i = 0; i < n; i++) {
+            strings[i] = sc.nextLine();
+        }
+        
+        if (n == 0) {
+            System.out.println("-1");
+            sc.close();
+            return;
+        }
+        
+        String prefix = strings[0];
         
         for (int i = 1; i < n; i++) {
-            if (nums[i] > maxVal) {
-                maxVal = nums[i];
-                maxIdx = i;
+            while (strings[i].indexOf(prefix) != 0) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) {
+                    System.out.println("-1");
+                    sc.close();
+                    return;
+                }
             }
         }
         
-        // Check if largest element is at least twice every other element
-        boolean isDominant = true;
-        for (int i = 0; i < n; i++) {
-            if (i != maxIdx && maxVal < 2 * nums[i]) {
-                isDominant = false;
-                break;
+        System.out.println(prefix);
+        sc.close();
+    }
+}
+
+// ========== Experiment 38: String Compression ==========
+import java.util.Scanner;
+
+class Experiment38 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        
+        StringBuilder compressed = new StringBuilder();
+        int count = 1;
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (i + 1 < s.length() && s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+            } else {
+                compressed.append(s.charAt(i));
+                compressed.append(count);
+                count = 1;
             }
         }
         
-        // Print result
-        if (isDominant) {
-            System.out.println(maxIdx);
+        String result = compressed.toString();
+        if (result.length() < s.length()) {
+            System.out.println(result);
         } else {
-            System.out.println(-1);
+            System.out.println(s);
+        }
+        sc.close();
+    }
+}
+
+// ========== Experiment 39: StringTokenizer (Sum of Integers) ==========
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+class Experiment39 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        
+        StringTokenizer st = new StringTokenizer(line);
+        int sum = 0;
+        
+        while (st.hasMoreTokens()) {
+            sum += Integer.parseInt(st.nextToken());
         }
         
+        System.out.println(sum);
+        sc.close();
+    }
+}
+
+// ========== Experiment 40: Sorting Strings ==========
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Experiment40 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        String[] names = new String[n];
+        for (int i = 0; i < n; i++) {
+            names[i] = sc.nextLine();
+        }
+        
+        Arrays.sort(names);
+        
+        for (String name : names) {
+            System.out.println(name);
+        }
         sc.close();
     }
 }
