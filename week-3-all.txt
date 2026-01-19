@@ -1,0 +1,356 @@
+// ========== Experiment 41: Area Calculation (Method Overloading) ==========
+import java.util.Scanner;
+
+class AreaCalculator {
+    public float calculateArea(float radius) {
+        return (float) (Math.PI * radius * radius);
+    }
+    
+    public float calculateArea(float length, float breadth) {
+        return length * breadth;
+    }
+    
+    public double calculateArea(double base, double height) {
+        return 0.5 * base * height;
+    }
+}
+
+class Experiment41 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        float radius = sc.nextFloat();
+        float length = sc.nextFloat();
+        float breadth = sc.nextFloat();
+        double base = sc.nextDouble();
+        double height = sc.nextDouble();
+        
+        AreaCalculator calc = new AreaCalculator();
+        
+        System.out.printf("%.2f%n", calc.calculateArea(radius));
+        System.out.printf("%.2f%n", calc.calculateArea(length, breadth));
+        System.out.printf("%.2f%n", calc.calculateArea(base, height));
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 42: Student Class (Constructors) ==========
+import java.util.Scanner;
+
+class Student {
+    String name;
+    int rollNo;
+    
+    public Student(String name, int rollNo) {
+        this.name = name;
+        this.rollNo = rollNo;
+    }
+    
+    public void display() {
+        System.out.println("Name: " + name + " Roll: " + rollNo);
+    }
+}
+
+class Experiment42 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String name1 = sc.nextLine();
+        int roll1 = sc.nextInt();
+        sc.nextLine();
+        String name2 = sc.nextLine();
+        int roll2 = sc.nextInt();
+        
+        Student s1 = new Student(name1, roll1);
+        Student s2 = new Student(name2, roll2);
+        
+        s1.display();
+        s2.display();
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 43: Inheritance (Employee Hierarchy) ==========
+import java.util.Scanner;
+
+class Employee {
+    String name;
+    int age;
+    String phoneNumber;
+    String address;
+    int salary;
+    
+    public void printSalary() {
+        System.out.println(salary);
+    }
+}
+
+class Officer extends Employee {
+    String specialization;
+}
+
+class Manager extends Employee {
+    String department;
+}
+
+class Experiment43 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        Officer officer = new Officer();
+        officer.name = sc.nextLine();
+        officer.age = sc.nextInt();
+        sc.nextLine();
+        officer.phoneNumber = sc.nextLine();
+        officer.address = sc.nextLine();
+        officer.salary = sc.nextInt();
+        sc.nextLine();
+        officer.specialization = sc.nextLine();
+        
+        Manager manager = new Manager();
+        manager.name = sc.nextLine();
+        manager.age = sc.nextInt();
+        sc.nextLine();
+        manager.phoneNumber = sc.nextLine();
+        manager.address = sc.nextLine();
+        manager.salary = sc.nextInt();
+        sc.nextLine();
+        manager.department = sc.nextLine();
+        
+        System.out.println("Officer:");
+        System.out.println(officer.name);
+        System.out.println(officer.age);
+        System.out.println(officer.phoneNumber);
+        System.out.println(officer.address);
+        System.out.println(officer.salary);
+        System.out.println(officer.specialization);
+        
+        System.out.println("Manager:");
+        System.out.println(manager.name);
+        System.out.println(manager.age);
+        System.out.println(manager.phoneNumber);
+        System.out.println(manager.address);
+        System.out.println(manager.salary);
+        System.out.println(manager.department);
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 44: Complex Number Addition ==========
+import java.util.Scanner;
+
+class Complex {
+    int real;
+    int imaginary;
+    
+    public Complex(int real, int imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+    
+    public Complex add(Complex other) {
+        return new Complex(this.real + other.real, this.imaginary + other.imaginary);
+    }
+    
+    public void display() {
+        System.out.println(real + " + " + imaginary + "i");
+    }
+}
+
+class Experiment44 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int r1 = sc.nextInt();
+        int i1 = sc.nextInt();
+        int r2 = sc.nextInt();
+        int i2 = sc.nextInt();
+        
+        Complex c1 = new Complex(r1, i1);
+        Complex c2 = new Complex(r2, i2);
+        Complex sum = c1.add(c2);
+        
+        sum.display();
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 45: Method Overriding (Employee/Engineer) ==========
+class Employee45 {
+    public void display() {
+        System.out.println("Name of class is Employee");
+    }
+}
+
+class Engineer extends Employee45 {
+    @Override
+    public void display() {
+        System.out.println("Name of class is Engineer");
+    }
+    
+    public void displayBoth() {
+        display();
+        super.display();
+    }
+}
+
+class Experiment45 {
+    public static void main(String[] args) {
+        Engineer eng = new Engineer();
+        eng.displayBoth();
+    }
+}
+
+// ========== Experiment 46: Abstract Class (Shapes) ==========
+abstract class Shape {
+    abstract void numberOfSides();
+}
+
+class Rectangle extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Rectangle has 4 sides");
+    }
+}
+
+class Triangle extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Triangle has 3 sides");
+    }
+}
+
+class Hexagon extends Shape {
+    @Override
+    void numberOfSides() {
+        System.out.println("Hexagon has 6 sides");
+    }
+}
+
+class Experiment46 {
+    public static void main(String[] args) {
+        Rectangle rect = new Rectangle();
+        Triangle tri = new Triangle();
+        Hexagon hex = new Hexagon();
+        
+        rect.numberOfSides();
+        tri.numberOfSides();
+        hex.numberOfSides();
+    }
+}
+
+// ========== Experiment 47: Interface (Resume) ==========
+import java.util.Scanner;
+
+interface Resume {
+    void biodata();
+}
+
+class Teacher implements Resume {
+    String name;
+    String qualification;
+    int experience;
+    
+    public Teacher(String name, String qualification, int experience) {
+        this.name = name;
+        this.qualification = qualification;
+        this.experience = experience;
+    }
+    
+    @Override
+    public void biodata() {
+        System.out.println("Name: " + name);
+        System.out.println("Qualification: " + qualification);
+        System.out.println("Experience: " + experience + " years");
+    }
+}
+
+class Experiment47 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String name = sc.nextLine();
+        String qualification = sc.nextLine();
+        int experience = sc.nextInt();
+        
+        Teacher teacher = new Teacher(name, qualification, experience);
+        teacher.biodata();
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 48: Garbage Collection ==========
+class GarbageDemo {
+    @Override
+    protected void finalize() {
+        System.out.println("Garbage Collected");
+    }
+}
+
+class Experiment48 {
+    public static void main(String[] args) {
+        GarbageDemo obj = new GarbageDemo();
+        obj = null;
+        System.gc();
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// ========== Experiment 49: 'this' Keyword ==========
+import java.util.Scanner;
+
+class Demo {
+    int value;
+    
+    public void setValue(int value) {
+        this.value = value;
+    }
+    
+    public void display() {
+        System.out.println("Value: " + this.value);
+    }
+}
+
+class Experiment49 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int value = sc.nextInt();
+        
+        Demo d = new Demo();
+        d.setValue(value);
+        d.display();
+        
+        sc.close();
+    }
+}
+
+// ========== Experiment 50: 'super' Keyword (Constructor) ==========
+class Person {
+    public Person() {
+        System.out.println("Person class");
+    }
+}
+
+class Student50 extends Person {
+    public Student50() {
+        super();
+        System.out.println("Student class");
+    }
+}
+
+class Experiment50 {
+    public static void main(String[] args) {
+        Student50 s = new Student50();
+    }
+}
